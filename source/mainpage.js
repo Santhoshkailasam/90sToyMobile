@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'center',
     padding: dimension.spacing.sm,
-    marginTop: dimension.spacing.xxxl,
+    marginTop: dimension.spacing.xxl,
     marginLeft: dimension.spacing.xl,
   },
   button: {
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderColor: 'black',
     borderWidth: 2,
-    marginRight: 35,
+    marginRight: 37,
     marginTop: 25,
   },
   buttonText: {

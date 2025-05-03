@@ -4,7 +4,7 @@
     "slug": "90smobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/app-icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
@@ -17,12 +17,19 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/splash-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.skproduction.Barbietoymobile"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./assets/barbie.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "625d3493-fc71-4ce0-be8e-b1e9443ead68"
+      }
+    },
+    "owner": "santhoshkailasam"
   }
 }
