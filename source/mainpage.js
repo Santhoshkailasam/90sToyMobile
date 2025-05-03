@@ -1,91 +1,141 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  SafeAreaView,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 import { Audio } from "expo-av";
+import dimension from "../responsive_size/dimension";
+import Barbie from "../assets/barbie.png";
 
 const Mainpage = () => {
-    const [sound, setSound] = useState(null);
-    const [currentSong, setCurrentSong] = useState(null); // Track which song is playing
+  const buttons = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '*', '0', '#'];
 
-    useEffect(() => {
-        return () => {
-            if (sound) {
-                sound.unloadAsync(); // Cleanup on unmount
-            }
-        };
-    }, [sound]);
+  const songs = {
+    '1': require('../assets/song.mp3'),
+    '2': require('../assets/nokia.mp3'),
+    '3': require('../assets/devvuda.mp3'),
+    '4': require('../assets/ring.mp3'),
+    '5': require('../assets/song.mp3'),
+    '6': require('../assets/devvuda.mp3'),
+    '7': require('../assets/nokia.mp3'),
+    '8': require('../assets/ring.mp3'),
+    '9': require('../assets/devvuda.mp3'),
+    '0': require('../assets/nokia.mp3'),
+    '*': require('../assets/song.mp3'),
+    '#': require('../assets/ring.mp3'),
+  };
 
-    const playSong = async (songFile) => {
-        try {
-            // Stop and unload current sound if playing
-            if (sound) {
-                await sound.stopAsync();
-                await sound.unloadAsync();
-            }
+  const [sound, setSound] = useState(null);
 
-            // Load and play the new song
-            const { sound: newSound } = await Audio.Sound.createAsync(
-                songFile,
-                { shouldPlay: true }
-            );
-            setSound(newSound);
-            setCurrentSong(songFile);
-        } catch (error) {
-            console.log("Error playing sound:", error);
-        }
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (sound) {
+        sound.unloadAsync();
+      }
     };
+  }, [sound]);
 
-    return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.insidebox}>
-                <TouchableOpacity 
-                    style={styles.button} 
-                    onPress={() => playSong(require("../assets/devvuda.mp3"))} 
-                    activeOpacity={0.7}
-                >
-                    <Text style={styles.buttonText}>
-                        Play Song 1
-                    </Text>
-                </TouchableOpacity>
-                
-                <TouchableOpacity 
-                    style={[styles.button, { marginTop: 20 }]} 
-                    onPress={() => playSong(require("../assets/nokia.mp3"))} 
-                    activeOpacity={0.7}
-                >
-                    <Text style={styles.buttonText}>
-                        Play Song 2
-                    </Text>
-                </TouchableOpacity>
-            </View>
-        </SafeAreaView>
-    );
+  const playSong = async (buttonValue) => {
+    try {
+      const songFile = songs[buttonValue];
+
+      if (!songFile) {
+        console.log(`No song for ${buttonValue}`);
+        return;
+      }
+
+      // Stop and unload previous sound
+      if (sound) {
+        await sound.stopAsync();
+        await sound.unloadAsync();
+      }
+
+      // Load new sound
+      const { sound: newSound } = await Audio.Sound.createAsync(songFile);
+
+      setSound(newSound); // Save reference
+      await newSound.playAsync(); // Safe to call now
+
+      newSound.setOnPlaybackStatusUpdate((status) => {
+        if (status.isLoaded && status.isPlaying) {
+          console.log("🎵 Song is playing");
+        }
+        if (!status.isLoaded) {
+          console.log("⚠️ Sound not loaded");
+        }
+      });
+    } catch (error) {
+      console.error("❌ Error playing sound:", error);
+    }
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+        {/* Image container */}
+
+      <View style={styles.imgcontainer}>
+        <Image source={Barbie} style={styles.barbie} />
+      </View>
+
+      {/* Dialpad container */}
+      <View style={styles.dialpadcontainer}>
+        {buttons.map((button, index) => (
+          <TouchableOpacity
+            key={index}
+            onPress={() => playSong(button)}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>{button}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: "#E0218A",
-        flex: 1
-    },
-    insidebox: {
-        justifyContent: "center",
-        alignItems: "center",
-        flex: 1
-    },
-    button: {
-        backgroundColor: "blue",
-        borderRadius: 50,
-        height: 60,
-        width: 250,
-        justifyContent: "center",
-        alignItems: "center",
-        padding: 10
-    },
-    buttonText: {
-        color: "white",
-        textAlign: "center",
-        fontWeight: "bold",
-        fontSize: 16
-    }
+  container: {
+    backgroundColor: "#D8246F",
+    flex: 1,
+  },
+  imgcontainer: {
+    alignItems: 'center',
+  },
+  barbie: {
+    width: dimension.scale(320),
+    height: dimension.verticalScale(320),
+    marginTop: dimension.window.height * 0.1,
+  },
+  dialpadcontainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    padding: dimension.spacing.sm,
+    marginTop: dimension.spacing.xxxl,
+    marginLeft: dimension.spacing.xl,
+  },
+  button: {
+    width: '20%',
+    aspectRatio: 1,
+    margin: '1%',
+    backgroundColor: '#ddd',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
+    borderColor: 'black',
+    borderWidth: 2,
+    marginRight: 35,
+    marginTop: 25,
+  },
+  buttonText: {
+    fontSize: dimension.fontSize.xxl,
+    fontWeight: 'bold',
+  },
 });
 
 export default Mainpage;
