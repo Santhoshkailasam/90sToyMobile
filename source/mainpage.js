@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Image,
+  StatusBar
 } from "react-native";
 import { Audio } from "expo-av";
 import dimension from "../responsive_size/dimension";
@@ -77,9 +78,8 @@ const Mainpage = () => {
   return (
     <SafeAreaView style={styles.container}>
         {/* Image container */}
-
       <View style={styles.imgcontainer}>
-        <Image source={Barbie} style={styles.barbie} />
+        <Image source={Barbie} style={styles.barbie} resizeMode="contain"/>
       </View>
 
       {/* Dialpad container */}
@@ -94,14 +94,15 @@ const Mainpage = () => {
           </TouchableOpacity>
         ))}
       </View>
+     
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#D8246F",
-    flex: 1,
+    backgroundColor: "#F364A2",
+    
   },
   imgcontainer: {
     alignItems: 'center',
