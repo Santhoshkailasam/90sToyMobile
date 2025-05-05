@@ -77,6 +77,10 @@ const Mainpage = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+       <StatusBar
+        barStyle="light-content" // Light text/icons
+        backgroundColor="#D8246F" // Barbie pink
+      />
         {/* Image container */}
       <View style={styles.imgcontainer}>
         <Image source={Barbie} style={styles.barbie} resizeMode="contain"/>
@@ -102,7 +106,7 @@ const Mainpage = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#F364A2",
-    
+    flex:1,
   },
   imgcontainer: {
     alignItems: 'center',
