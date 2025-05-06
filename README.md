@@ -11,7 +11,9 @@ plastic mobile phones that played tunes when the keypad was pressed.
 - 🔋 **Lightweight & Fun**: A simple, fun app perfect for both nostalgic adults and curious kids.
 
 ## 📸 Screenshots
-![barbie](https://github.com/user-attachments/assets/71c0876c-7d8f-4bd8-99f9-c4c53a3d3cc4)
+
+<img src="https://github.com/user-attachments/assets/8b1f9fd1-4630-404d-a996-b5243426de24" alt="Barbie Toy Mobile Screenshot" width="400"/>
+
 
 
 
