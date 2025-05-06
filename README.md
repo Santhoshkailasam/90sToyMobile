@@ -21,7 +21,8 @@ plastic mobile phones that played tunes when the keypad was pressed.
 
 ### Android
 
-Download the APK from the <a href="https://drive.google.com/uc?export=download&id=1NWirr3_bhmLazRYUVutYrgCVJkifY7iH"   > <button  id="download-btn">Download Resume</button></a> section and install it on your Android device.
+Download the APK from the [Release]([https://drive.google.com/file/d/1NWirr3_bhmLazRYUVutYrgCVJkifY7iH/view?usp=sharing](https://drive.google.com/uc?export=download&id=1NWirr3_bhmLazRYUVutYrgCVJkifY7iH
+))section and install it on your Android device.
 ### iOS
 
 *Coming Soon (if applicable).*
